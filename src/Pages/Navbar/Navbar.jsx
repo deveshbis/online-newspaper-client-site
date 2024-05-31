@@ -44,7 +44,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 {/* <Link to='/'><img src={navBarLogo} className="h-16" /></Link> */}
-                <Link to='/' className="btn btn-ghost lg:text-2xl md:texxl text-xs text-black">Newspaper Website</Link>
+                <Link to='/' className="btn btn-ghost lg:text-2xl md:texxl text-xs text-black">Newspaper Web</Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal flex gap-5 font-semibold text-[16px]">
