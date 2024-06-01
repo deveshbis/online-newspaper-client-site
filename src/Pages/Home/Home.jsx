@@ -1,9 +1,10 @@
+import TrendingArticles from "../Articles/TrendingArticles";
 
 
 const Home = () => {
     return (
         <div>
-            This is home pages
+            <TrendingArticles/>
         </div>
     );
 };
