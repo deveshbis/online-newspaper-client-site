@@ -7,6 +7,9 @@ import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Registration/Register";
 import ArticlesViewDetails from "../Pages/ArticlesViewDetails/ArticlesViewDetails";
+import PrivateRoute from "./PrivateRoute";
+import Subscribtion from "../Pages/Subscribtion/Subscribtion";
+import AddArticle from "../Pages/AddArticle/AddArticle";
 
 
   const router = createBrowserRouter([
@@ -29,7 +32,15 @@ import ArticlesViewDetails from "../Pages/ArticlesViewDetails/ArticlesViewDetail
         },
         {
             path: "/article/:id",
-            element: <ArticlesViewDetails></ArticlesViewDetails>,
+            element: <PrivateRoute><ArticlesViewDetails></ArticlesViewDetails></PrivateRoute>,
+        },
+        {
+            path: "/subscription",
+            element: <PrivateRoute><Subscribtion></Subscribtion></PrivateRoute>,
+        },
+        {
+            path: "/AddArticle",
+            element: <PrivateRoute><AddArticle></AddArticle></PrivateRoute>,
         },
       ]
     },
