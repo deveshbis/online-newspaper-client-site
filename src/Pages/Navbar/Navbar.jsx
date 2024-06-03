@@ -1,10 +1,12 @@
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import { useState } from "react";
+import useAdmin from "../../Hooks/useAdmin";
 
 
 const Navbar = () => {
 
+    const [isAdmin] = useAdmin()
     const { user, logoutUser } = useAuth();
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const toggleDropdown = () => {
@@ -23,10 +25,11 @@ const Navbar = () => {
     const navLinks = (
         <>
             <li><NavLink to='/'>Home</NavLink></li>
-            <li><NavLink to='/AllArticles'>All Articles</NavLink></li>
+            <li><NavLink to='/allArticles'>All Articles</NavLink></li>
             <li><NavLink to='/AddArticle'>Add Articles</NavLink></li>
             <li><NavLink to='/subscription'>Subscription</NavLink></li>
-            <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
+            {isAdmin && <li><NavLink to='/dashboard'>Dashboard</NavLink></li>}
+            {/* <li><NavLink to='/dashboard'>Dashboard</NavLink></li> */}
             <li><NavLink to='/premiumArticles'>Premium Articles</NavLink></li>
         </>
     );

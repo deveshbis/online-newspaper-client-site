@@ -18,7 +18,7 @@ const TrendingArticles = () => {
         .then(res => res.json())
         .then(data => setnews(data))
     }, [])
-    console.log(news);
+    // console.log(news);
 
     const truncateContent = (content, maxLength) => {
         const words = content.split(' ');

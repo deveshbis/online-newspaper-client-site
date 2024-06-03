@@ -10,6 +10,7 @@ const useAxiosSecure = () => {
 
     const navigate = useNavigate()
     const { logoutUser } = useAuth()
+    
     axiosSecure.interceptors.request.use(function (config) {
         const token = localStorage.getItem("access-token")
         // console.log("req stop", token);

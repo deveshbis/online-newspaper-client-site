@@ -1,25 +1,17 @@
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import useAuth from "../../Hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-import { axiosPublicSecure } from "../../Hooks/usePublicSecure";
+import usePublicSecure from "../../Hooks/usePublicSecure";
 
 
 const SocialLogin = () => {
     const { googleLogin, gitHubLogin } = useAuth();
-
+    const axiosPublic = usePublicSecure();
     const navigate = useNavigate();
+
     // const location = useLocation();
 
     // const from = location?.state || '/';
-
-    // const handleSocialLogin = socialProvider => {
-    //     socialProvider()
-    //         .then(result => {
-    //             if (result.user) {
-    //                 navigate(from);
-    //             }
-    //         })
-    // }
 
     const handleGooglelLogin = () => {
         googleLogin()
@@ -27,11 +19,13 @@ const SocialLogin = () => {
                 console.log(result.user)
                 const userInfo = {
                     email: result.user?.email,
-                    name: result.user?.displayName
+                    name: result.user?.displayName,
+                    photo: result.user?.photoURL
+
                 }
-                axiosPublicSecure.post("/users", userInfo)
+                axiosPublic.post("/users", userInfo)
                     .then(res => {
-                        console.log(res);
+                        console.log(res.data);
                         navigate('/')
                     })
 
@@ -39,19 +33,21 @@ const SocialLogin = () => {
     }
     const handleGithubLogin = () => {
         gitHubLogin()
-            .then(result => {
-                console.log(result.user)
-                const userInfo = {
-                    email: result.user?.email,
-                    name: result.user?.displayName
-                }
-                axiosPublicSecure.post("/users", userInfo)
-                    .then(res => {
-                        console.log(res);
-                        navigate('/')
-                    })
+        .then(result => {
+            console.log(result.user)
+            const userInfo = {
+                email: result.user?.email,
+                name: result.user?.displayName,
+                photo: result.user?.photoURL
 
-            })
+            }
+            axiosPublic.post("/users", userInfo)
+                .then(res => {
+                    console.log(res.data);
+                    navigate('/')
+                })
+
+        })
     }
     return (
         <div className=" flex flex-col items-center space-y-2">

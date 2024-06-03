@@ -12,6 +12,8 @@ import Subscribtion from "../Pages/Subscribtion/Subscribtion";
 import AddArticle from "../Pages/AddArticle/AddArticle";
 import Dashboard from "../Dashboard/Dashboard";
 import Allusers from "../Dashboard/AllUsers/Allusers";
+import AdminRoute from "./AdminRoute";
+import AllArticles from "../Pages/All Articles/AllArticles";
 
 
 const router = createBrowserRouter([
@@ -44,12 +46,20 @@ const router = createBrowserRouter([
         path: "/AddArticle",
         element: <PrivateRoute><AddArticle></AddArticle></PrivateRoute>,
       },
+      {
+        path: "/allArticles",
+        element: <PrivateRoute><AllArticles></AllArticles></PrivateRoute>,
+      },
+      {
+        path: "/premiumArticles",
+        element: <PrivateRoute></PrivateRoute>,
+      },
     ]
   },
 
   {
     path: "dashboard",
-    element: <Dashboard></Dashboard>,
+    element: <AdminRoute><Dashboard></Dashboard></AdminRoute>,
     children: [
       {
         //admin

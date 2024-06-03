@@ -36,6 +36,7 @@ const Allusers = () => {
 
         <div>
             <div>
+               
                 <h2 className="text-3xl">All Users: ({users.length}) </h2>
             </div>
             <div className="overflow-x-auto">
