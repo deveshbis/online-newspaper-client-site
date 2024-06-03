@@ -271,7 +271,8 @@ const Register = () => {
                         // console.log("user updated");
                         const userInfo = {
                             name: data.name,
-                            email: data.email
+                            email: data.email,
+                            photoUrl: data.photo,
                         }
                         axiosPublic.post("/users", userInfo)
                             .then(res => {

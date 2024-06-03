@@ -1,6 +1,6 @@
-import { FaHome } from "react-icons/fa";
-import {  MdOutlineRestaurantMenu } from "react-icons/md";
-import { SiFoodpanda } from "react-icons/si";
+import { BiUser } from "react-icons/bi";
+import {  MdPublishedWithChanges } from "react-icons/md";
+import { RiArticleLine } from "react-icons/ri";
 import { NavLink, Outlet } from "react-router-dom";
 
 
@@ -15,13 +15,13 @@ const Dashboard = () => {
                 {isAdmin && (
                     <div>
                         <ul className="menu">
-                            <li><NavLink to="/dashboard/users"><FaHome /> All User </NavLink></li>
+                            <li><NavLink to="/dashboard/users"><BiUser /> All User </NavLink></li>
                         </ul>
                         <ul className="menu">
-                            <li><NavLink to="/dashboard/articles"><MdOutlineRestaurantMenu /> All Articles</NavLink></li>
+                            <li><NavLink to="/dashboard/articles"><RiArticleLine /> All Articles</NavLink></li>
                         </ul>
                         <ul className="menu">
-                            <li><NavLink to="/dashboard/addPublisher"><SiFoodpanda /> Add Publisher</NavLink></li>
+                            <li><NavLink to="/dashboard/addPublisher"><MdPublishedWithChanges /> Add Publisher</NavLink></li>
                         </ul>
 
                     </div>
