@@ -1,6 +1,7 @@
 import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import auth from "../Firebase/firebase.config";
+import { axiosPublicSecure } from "../Hooks/usePublicSecure";
 
 
 
@@ -59,14 +60,35 @@ const AuthProvider = ({ children }) => {
     }
 
     //current user
+    // useEffect(() => {
+    //     const unSubscribe = onAuthStateChanged(auth, (user) => {
+    //         if (user) {
+    //             setUser(user);
+    //             setLoading(false);
+    //         }
+    //         else{
+    //             setLoading(false); 
+    //         }
+    //     });
+    //     return () => unSubscribe();
+    // }, [reload])
+
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, (user) => {
+            setUser(user)
+            setLoading(false); 
             if (user) {
-                setUser(user);
-                setLoading(false);
+                const userInfo = {email: user.email}
+                axiosPublicSecure.post("/jwt", userInfo )
+                .then(res =>{
+                    if(res.data.token){
+                        localStorage.setItem("access-token", res.data.token)
+                    }
+                })
             }
             else{
                 setLoading(false); 
+                localStorage.removeItem("access-token");
             }
         });
         return () => unSubscribe();
