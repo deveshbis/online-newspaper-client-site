@@ -16,23 +16,19 @@ const AllPublisher = () => {
     })
     // console.log(allPublisher);
     return (
-        <div>
+        <div className="mt-5">
             <h1 className="text-4xl border-l-8 border-indigo-500">All Publisher</h1>
             <div className="grid grid-cols-3 gap-6">
                 {allPublisher.map((publisher, index) => (
-                    <div key={index}>
-                        <img
-                            alt=""
-                            src={publisher.image}
-                            className="h-56 w-full rounded-bl-3xl rounded-tr-3xl object-cover sm:h-64 lg:h-72"
-                        />
+                    <div key={index} className="w-full max-w-xs overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 mt-4">
+                        <img className="object-cover w-full h-56" src={publisher.image} alt="avatar" />
 
+                        <div className="py-5 flex justify-between items-center p-5">
+                            <a href="#" className="block text-xl font-bold text-gray-800 dark:text-white" tabIndex="0" role="link">Branding Name</a>
+                            <span className="text-sm text-gray-700 dark:text-gray-200">{publisher.publisher}</span>
+                        </div>
                         <div className="mt-4 sm:flex sm:items-center sm:justify-center sm:gap-4">
-                            <strong className="font-medium">Branding Name</strong>
-
-                            <span className="hidden sm:block sm:h-px sm:w-8 sm:bg-yellow-500"></span>
-
-                            <p className="mt-0.5 opacity-50 sm:mt-0">{publisher.publisher}</p>
+                            
                         </div>
                     </div>
                 ))}
