@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
+import useAxiosPublic from '../../Hooks/useAxiosPublic';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
-import usePublicSecure from '../../Hooks/usePublicSecure';
 
 
 
@@ -10,7 +10,7 @@ const img_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}
 
 const AddArticle = () => {
     const { register, handleSubmit, reset } = useForm();
-    const axiosPublic = usePublicSecure();
+    const axiosPublic = useAxiosPublic()
     const axiosSecure = useAxiosSecure();
     const onSubmit = async (data) => {
         console.log(data)

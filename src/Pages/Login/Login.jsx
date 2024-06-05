@@ -2,8 +2,9 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import useAuth from "../../Hooks/useAuth";
-import SocialLogin from "./SocialLogin";
+// import SocialLogin from "./SocialLogin";
 import loginBanner from "../../assets/loginBaner.webp"
+import SocialLogin from "./SocialLogin";
 
 
 
@@ -105,3 +106,14 @@ const Login = () => {
 };
 
 export default Login;
+
+
+
+
+
+
+
+
+
+
+

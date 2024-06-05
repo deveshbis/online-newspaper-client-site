@@ -3,15 +3,16 @@
 // import registerBanner from "../../assets/registerBanner.jpg";
 // import { useForm } from "react-hook-form";
 // // import { toast } from "react-toastify";
-// import usePublicSecure from "../../Hooks/usePublicSecure";
+
 // import Swal from "sweetalert2";
+// import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 
 
 // const Register = () => {
 //     // const { createUser, updateUserProfile, setReload } = useAuth()
 //     const { createUser, updateUserProfile } = useAuth()
-//     const axiosPublic = usePublicSecure()
+//     const axiosPublic = useAxiosPublic()
 //     const navigate = useNavigate();
 //     // const from = '/';
 
@@ -21,21 +22,6 @@
 //         formState: { errors },
 //     } = useForm()
 
-//     // const onSubmit = (data) => {
-//     //     const { email, password, image, fullName } = data;
-//     //     createUser(email, password)
-//     //         .then(() => {
-//     //             toast.success("Registration successful!");
-//     //             updateUserProfile(fullName, image)
-//     //                 .then(() => {
-//     //                     toast.success("Registration successful!");
-//     //                     navigate(from, { replace: true });
-//     //                     setReload(true)
-//     //                 })
-//     //         }).catch(error => {
-//     //             toast.error(`Failed to register: ${error.message}`);
-//     //         });
-//     // };
 
 //     const onSubmit = (data) => {
 //         console.log(data)
@@ -241,18 +227,21 @@
 
 
 
-import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
-import usePublicSecure from "../../Hooks/usePublicSecure";
 import registerBanner from "../../assets/registerBanner.jpg";
 import useAuth from "../../Hooks/useAuth";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import Swal from "sweetalert2";
+import { useForm } from "react-hook-form";
+
+
 
 
 const Register = () => {
+ 
     const navigate = useNavigate();
-    const axiosPublic = usePublicSecure()
-    const { createUser, updateUserProfile } = useAuth()
+    const axiosPublic = useAxiosPublic()
+    const { createUser, updateUserProfile, setReload } = useAuth()
     const {
         register,
         handleSubmit,
@@ -260,40 +249,45 @@ const Register = () => {
         formState: { errors },
     } = useForm()
 
-    const onSubmit = (data) => {
-        console.log(data)
+    const onSubmit = data => {
+
         createUser(data.email, data.password)
             .then(result => {
                 const loggedUser = result.user;
                 console.log(loggedUser);
-                updateUserProfile(data.name, data.photoUrl)
+                updateUserProfile(data.name, data.photoURL)
                     .then(() => {
-                        // console.log("user updated");
+                        // create user entry in the database
                         const userInfo = {
                             name: data.name,
                             email: data.email,
                             photoUrl: data.photo,
                         }
-                        axiosPublic.post("/users", userInfo)
+                        axiosPublic.post('/users', userInfo)
                             .then(res => {
                                 if (res.data.insertedId) {
-                                    reset()
+                                    console.log('user added to the database', userInfo)
+                                    reset();
                                     Swal.fire({
-                                        position: "top-end",
-                                        icon: "success",
-                                        title: "User Created Successfully",
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: 'User created successfully.',
                                         showConfirmButton: false,
                                         timer: 1500
                                     });
-                                    navigate('/')
+                                    navigate('/');
+                                    
                                 }
                             })
+                            setReload(true)
+
 
                     })
                     .catch(error => console.log(error))
             })
+    };
 
-    }
+
     return (
         <div>
             <section className="bg-white">
@@ -375,8 +369,9 @@ const Register = () => {
                                         {...register("photo", { required: true })}
                                         className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                                     />
+                                    
                                     {errors.photo && <span className="text-red-600">This field is required</span>}
-                            
+
                                 </div>
 
                                 <div className="col-span-6 sm:col-span-3">

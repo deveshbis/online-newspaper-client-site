@@ -4,9 +4,10 @@ import { useState } from "react";
 import useAdmin from "../../Hooks/useAdmin";
 
 
+
 const Navbar = () => {
 
-    const [isAdmin] = useAdmin()
+  const [isAdmin,] =  useAdmin()
     const { user, logoutUser } = useAuth();
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const toggleDropdown = () => {
@@ -29,7 +30,6 @@ const Navbar = () => {
             <li><NavLink to='/AddArticle'>Add Articles</NavLink></li>
             <li><NavLink to='/subscription'>Subscription</NavLink></li>
             {isAdmin && <li><NavLink to='/dashboard'>Dashboard</NavLink></li>}
-            {/* <li><NavLink to='/dashboard'>Dashboard</NavLink></li> */}
             <li><NavLink to='/premiumArticles'>Premium Articles</NavLink></li>
         </>
     );

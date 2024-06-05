@@ -4,24 +4,23 @@ import { FaUser } from "react-icons/fa";
 import Swal from "sweetalert2";
 
 
-const Allusers = () => {
+const AllUsers = () => {
     const axiosSecure = useAxiosSecure()
-
     const { data: users = [], refetch } = useQuery({
-        queryKey: ["users"],
+        queryKey: ['users'],
         queryFn: async () => {
-            const res = await axiosSecure.get("/users")
+            const res = await axiosSecure.get('/users');
             return res.data
         }
 
     })
 
-    const handlemakeAdmin = user => {
+    const handleMakeAdmin = user => {
         axiosSecure.patch(`/users/admin/${user._id}`)
             .then(res => {
-                console.log(res.data);
+                console.log(res.data)
                 if (res.data.modifiedCount > 0) {
-                    refetch()
+                    refetch();
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
@@ -33,14 +32,14 @@ const Allusers = () => {
             })
     }
     return (
-
         <div>
-            <div>
-               
-                <h2 className="text-3xl">All Users: ({users.length}) </h2>
+            <div className="flex justify-between items-center">
+                <h2 className="text-2xl">All User</h2>
+                <h2 className="text-2xl">Total User ({users.length})</h2>
+
             </div>
             <div className="overflow-x-auto">
-                <table className="table table-zebra">
+                <table className="table table-zebra w-full">
                     {/* head */}
                     <thead>
                         <tr>
@@ -66,9 +65,12 @@ const Allusers = () => {
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>
-                                    {
-                                        user.role === 'admin' ? "Admin" : <button onClick={() => handlemakeAdmin(user)} className="btn btn-ghost text-2xl"><FaUser /></button>
-                                    }
+                                    {user.role === 'admin' ? 'Admin' : <button
+                                        onClick={() => handleMakeAdmin(user)}
+                                        className="btn btn-primary">
+                                        <FaUser className="text-white 
+                                        text-2xl"></FaUser>
+                                    </button>}
                                 </td>
 
                             </tr>)
@@ -81,4 +83,4 @@ const Allusers = () => {
     );
 };
 
-export default Allusers;
+export default AllUsers;

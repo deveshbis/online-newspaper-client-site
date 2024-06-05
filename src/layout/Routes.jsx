@@ -5,16 +5,20 @@ import Root from "../Root/Root";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
-import Register from "../Pages/Registration/Register";
+// import Register from "../Pages/Registration/Register";
 import ArticlesViewDetails from "../Pages/ArticlesViewDetails/ArticlesViewDetails";
 import PrivateRoute from "./PrivateRoute";
 import Subscribtion from "../Pages/Subscribtion/Subscribtion";
-import AddArticle from "../Pages/AddArticle/AddArticle";
+// import AddArticle from "../Pages/AddArticle/AddArticle";
 import Dashboard from "../Dashboard/Dashboard";
-import Allusers from "../Dashboard/AllUsers/Allusers";
-import AdminRoute from "./AdminRoute";
+
 import AllArticles from "../Pages/All Articles/AllArticles";
+import Register from "../Pages/Registration/Register";
+import AllUsers from "../Dashboard/AllUsers/AllUsers";
+import AdminRoute from "./AdminRoute";
 import AddPublisher from "../Dashboard/AddPublisher/AddPublisher";
+import AddArticle from "../Pages/AddArticle/AddArticle";
+
 
 
 const router = createBrowserRouter([
@@ -62,14 +66,14 @@ const router = createBrowserRouter([
     path: "dashboard",
     element: <AdminRoute><Dashboard></Dashboard></AdminRoute>,
     children: [
+      
       {
-        //admin
-        path: "users",
-        element: <Allusers></Allusers>,
+        path: 'users',
+        element: <AllUsers></AllUsers>,
       },
       {
-        path: "addPublisher",
-        element: <AddPublisher/>,
+        path: 'addPublisher',
+        element: <AddPublisher></AddPublisher>,
       },
     ]
   }

@@ -2,20 +2,21 @@ import { BiUser } from "react-icons/bi";
 import { MdPublishedWithChanges } from "react-icons/md";
 import { RiArticleLine } from "react-icons/ri";
 import { NavLink, Outlet } from "react-router-dom";
-import useAdmin from "../Hooks/useAdmin";
 import { FaHome } from "react-icons/fa";
+import useAdmin from "../Hooks/useAdmin";
 
 
 
 const Dashboard = () => {
 
     const [isAdmin] = useAdmin()
+   
     // const isAdmin = true;
 
     return (
         <div className="flex">
             <div className="w-64 bg-yellow-600 min-h-screen text-white">
-                <h2 className="text-4xl text-center">Dashboard</h2>
+                <h2 className="text-2xl text-center mt-3">Admin Dashboard</h2>
                 <div className="divider"></div>
 
                 {

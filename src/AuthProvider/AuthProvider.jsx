@@ -1,7 +1,8 @@
 import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import auth from "../Firebase/firebase.config";
-import usePublicSecure from "../Hooks/usePublicSecure";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
+// import usePublicSecure from "../Hooks/usePublicSecure";
 
 
 
@@ -17,8 +18,7 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [reload, setReload] = useState(false);
-    const axiosPublic = usePublicSecure()
-
+    const axiosPublic = useAxiosPublic()
     //create User
     const createUser = (email, password) => {
         setLoading(true);
@@ -68,33 +68,37 @@ const AuthProvider = ({ children }) => {
     //             setUser(user);
     //             setLoading(false);
     //         }
-    //         else{
-    //             setLoading(false); 
+    //         else {
+    //             setLoading(false);
     //         }
     //     });
     //     return () => unSubscribe();
     // }, [reload])
 
     useEffect(() => {
-        const unSubscribe = onAuthStateChanged(auth, (user) => {
-            setUser(user)
+        const unsubscribe = onAuthStateChanged(auth, user => {
+            setUser(user);
             if (user) {
-                const userInfo = { email: user.email }
-                axiosPublic.post("/jwt", userInfo)
+                // get token and store client
+                const userInfo = { email: user.email };
+                axiosPublic.post('/jwt', userInfo)
                     .then(res => {
                         if (res.data.token) {
-                            localStorage.setItem("access-token", res.data.token)
+                            localStorage.setItem('access-token', res.data.token);
+                            setLoading(false);
                         }
                     })
             }
             else {
-
-                localStorage.removeItem("access-token");
+                // TODO: remove token (if token stored in the client side: Local storage, caching, in memory)
+                localStorage.removeItem('access-token');
+                setLoading(false);
             }
-            setLoading(false);
+            
         });
-        return () => unSubscribe();
-        
+        return () => {
+            return unsubscribe();
+        }
     }, [axiosPublic, reload])
 
     const allValue = {

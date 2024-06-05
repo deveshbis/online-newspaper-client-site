@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
+// import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-
 
 
 const AllPublisher = () => {
     const axiosSecure = useAxiosSecure()
+    // const axiosPublic = useAxiosPublic()
 
     const { data: allPublisher = [] } = useQuery({
         queryKey: ["adminPublisher"],
