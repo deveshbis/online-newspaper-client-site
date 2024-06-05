@@ -25,7 +25,7 @@ const Dashboard = () => {
                             <li><NavLink to="/dashboard/users"><BiUser /> All User </NavLink></li>
                         </ul>
                         <ul className="menu">
-                            <li><NavLink to="/dashboard/articles"><RiArticleLine /> All Articles</NavLink></li>
+                            <li><NavLink to="/dashboard/allArticlesPage"><RiArticleLine /> All Articles</NavLink></li>
                         </ul>
                         <ul className="menu">
                             <li><NavLink to="/dashboard/addPublisher"><MdPublishedWithChanges /> Add Publisher</NavLink></li>

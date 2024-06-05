@@ -2,6 +2,8 @@ import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import useAxiosPublic from '../../Hooks/useAxiosPublic';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import useAuth from '../../Hooks/useAuth';
+
 
 
 
@@ -9,9 +11,15 @@ const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const img_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 
 const AddArticle = () => {
+    const { user } = useAuth()
     const { register, handleSubmit, reset } = useForm();
     const axiosPublic = useAxiosPublic()
     const axiosSecure = useAxiosSecure();
+
+    const currentDate = new Date()
+    // const options = { year: 'numeric', month: 'short', day: 'numeric' };
+    const formattedDate = currentDate.toLocaleDateString();
+
     const onSubmit = async (data) => {
         console.log(data)
         // image upload to imgbb and then get an url
@@ -26,13 +34,19 @@ const AddArticle = () => {
             // now send the menu item data to the server with the image url
             const newsItem = {
                 title: data.title,
-                name: data.name,
+                publisher: data.publisher,
                 tags: data.tags,
                 description: data.description,
-                image: res.data.data.display_url
+                image: res.data.data.display_url,
+                authorEmail: user?.email,
+                authorName: user?.displayName,
+                status: "Pending",
+                date: formattedDate
+
             }
+            console.log(newsItem);
             // 
-            const newsRes = await axiosSecure.post('/publisher', newsItem);
+            const newsRes = await axiosSecure.post('/userPublisher', newsItem);
             console.log(newsRes.data)
             if (newsRes.data.insertedId) {
                 // show success popup
@@ -51,6 +65,7 @@ const AddArticle = () => {
 
     return (
         <div>
+          
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-control w-full my-6">
                     <label className="label">
@@ -72,7 +87,7 @@ const AddArticle = () => {
                         <input
                             type="text"
                             placeholder="Publisher"
-                            {...register('name', { required: true })}
+                            {...register('publisher', { required: true })}
                             required
                             className="input input-bordered w-full" />
                     </div>
@@ -103,9 +118,12 @@ const AddArticle = () => {
                 </div>
 
                 <button type="submit" className='btn btn-primary'>Submit</button>
+
             </form>
         </div>
     );
 };
 
 export default AddArticle;
+
+
