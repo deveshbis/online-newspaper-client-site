@@ -1,9 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-// import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+// import useAxiosPublic from "../../Hooks/useAxiosPublic";
+
 
 
 const AllPublisher = () => {
+
     const axiosSecure = useAxiosSecure()
     // const axiosPublic = useAxiosPublic()
 
@@ -15,7 +17,7 @@ const AllPublisher = () => {
         }
 
     })
-    // console.log(allPublisher);
+
     return (
         <div className="mt-5">
             <h1 className="text-4xl border-l-8 border-indigo-500">All Publisher</h1>
@@ -29,7 +31,7 @@ const AllPublisher = () => {
                             <span className="text-sm text-gray-700 dark:text-gray-200">{publisher.publisher}</span>
                         </div>
                         <div className="mt-4 sm:flex sm:items-center sm:justify-center sm:gap-4">
-                            
+
                         </div>
                     </div>
                 ))}

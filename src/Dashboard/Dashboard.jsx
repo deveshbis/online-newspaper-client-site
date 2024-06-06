@@ -10,13 +10,13 @@ import useAdmin from "../Hooks/useAdmin";
 const Dashboard = () => {
 
     const [isAdmin] = useAdmin()
-   
+
     // const isAdmin = true;
 
     return (
         <div className="flex">
             <div className="w-64 bg-yellow-600 min-h-screen text-white">
-                <h2 className="text-2xl text-center mt-3">Admin Dashboard</h2>
+                <h2 className="text-2xl text-center mt-3">Dashboard</h2>
                 <div className="divider"></div>
 
                 {
@@ -32,6 +32,7 @@ const Dashboard = () => {
                         </ul>
                     </> :
                         <>
+                        
                         </>
                 }
 

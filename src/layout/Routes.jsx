@@ -19,6 +19,8 @@ import AdminRoute from "./AdminRoute";
 import AddPublisher from "../Dashboard/AddPublisher/AddPublisher";
 import AddArticle from "../Pages/AddArticle/AddArticle";
 import AllArticlesPage from "../Dashboard/AllArticlesPage/AllArticlesPage";
+import Profile from "../Pages/Profile/Profile";
+import MyArticlesPage from "../Pages/MyArticlesPage/MyArticlesPage";
 
 
 
@@ -59,6 +61,14 @@ const router = createBrowserRouter([
       {
         path: "/premiumArticles",
         element: <PrivateRoute></PrivateRoute>,
+      },
+      {
+        path: "/myArticlesPage",
+        element: <PrivateRoute><MyArticlesPage/></PrivateRoute>,
+      },
+      {
+        path: "/profile",
+        element: <PrivateRoute><Profile/></PrivateRoute>,
       },
     ]
   },

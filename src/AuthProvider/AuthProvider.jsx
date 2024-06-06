@@ -53,8 +53,12 @@ const AuthProvider = ({ children }) => {
     }
 
     //logout
-    const logoutUser = () => {
+    const logoutUser = async () => {
         setLoading(true);
+        const { data } = await axiosPublic(`/logout`, {
+          withCredentials: true,
+        })
+        console.log(data)
         setUser(null);
         signOut(auth);
 
