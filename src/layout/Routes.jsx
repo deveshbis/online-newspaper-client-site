@@ -21,6 +21,8 @@ import AddArticle from "../Pages/AddArticle/AddArticle";
 import AllArticlesPage from "../Dashboard/AllArticlesPage/AllArticlesPage";
 import Profile from "../Pages/Profile/Profile";
 import MyArticlesPage from "../Pages/MyArticlesPage/MyArticlesPage";
+import MyAritcleView from "../Pages/MyArticlesPage/MyAritcleView";
+import MyPageUpdate from "../Pages/MyArticlesPage/MyPageUpdate";
 
 
 
@@ -45,6 +47,14 @@ const router = createBrowserRouter([
       {
         path: "/article/:id",
         element: <PrivateRoute><ArticlesViewDetails></ArticlesViewDetails></PrivateRoute>,
+      },
+      {
+        path: "/myArticles/:id",
+        element: <PrivateRoute><MyAritcleView/></PrivateRoute>,
+      },
+      {
+        path: "/myArticledUpdate/:id",
+        element: <PrivateRoute><MyPageUpdate/></PrivateRoute>,
       },
       {
         path: "/subscription",

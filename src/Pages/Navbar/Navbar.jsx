@@ -266,7 +266,7 @@ const Navbar = () => {
             <li><NavLink to='/subscription'>Subscription</NavLink></li>
             {isAdmin && <li><NavLink to='/dashboard'>Dashboard</NavLink></li>}
             <li><NavLink to='/premiumArticles'>Premium Articles</NavLink></li>
-            {user && !isAdmin &&<li><NavLink to='/myArticlesPage'>My Articles Page</NavLink></li>}
+            {user && !isAdmin && <li><NavLink to='/myArticlesPage'>My Articles Page</NavLink></li>}
         </>
     );
     return (

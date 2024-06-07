@@ -1,34 +1,62 @@
-import { FaEdit, FaPlay, FaTrash } from "react-icons/fa";
+import { FaEdit, FaPlay, FaTrashAlt } from "react-icons/fa";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-// import { useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { LuView } from "react-icons/lu";
 import { Link } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
+
+import Swal from "sweetalert2";
 
 
 const MyArticlesPage = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure()
-    const [jobs, setJobs] = useState([])
 
+    const { data: articles = [], refetch } = useQuery({
+        queryKey: ['articles'],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/myPublisher/${user?.email}`);
+            return res.data
+        }
 
-    useEffect(() => {
-        getData()
-    }, [user])
+    })
 
-    const getData = async () => {
-        const { data } = await axiosSecure(`/myPublisher/${user?.email}`)
-        setJobs(data)
+    const handleDeleteArticle = article => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                axiosSecure.delete(`/articles/${article._id}`)
+                    .then(res => {
+                        if (res.data.deletedCount > 0) {
+                            refetch();
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            });
+                        }
+                    })
+            }
+        });
     }
-    
+
+
     return (
         <div>
             <section className="container px-4 mx-auto">
                 <div className="flex items-center gap-x-3">
                     <h2 className="text-lg font-medium text-gray-800 dark:text-white">MY Articles</h2>
 
-                    <span className="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full dark:bg-gray-800 dark:text-blue-400">{jobs.length}</span>
+                    <span className="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full dark:bg-gray-800 dark:text-blue-400">{articles.length}</span>
                 </div>
 
                 <div className="flex flex-col mt-6">
@@ -58,9 +86,9 @@ const MyArticlesPage = () => {
                                             </th>
 
                                             <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                                <Link to='/article/:id'><button className="flex items-center gap-x-2">
+                                                <button className="flex items-center gap-x-2">
                                                     <span>View Details</span>
-                                                </button></Link>
+                                                </button>
                                             </th>
                                             <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                                 <button className="flex items-center gap-x-2">
@@ -81,35 +109,38 @@ const MyArticlesPage = () => {
                                     </thead>
                                     <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
                                         {
-                                            jobs.map((allArticle, index) => <tr key={allArticle._id}>
+                                            articles.map((article, index) => <tr key={article._id}>
                                                 <th>{index + 1}</th>
-                                                <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{allArticle.title}</td>
+                                                <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{article.title}</td>
 
                                                 <td className="px-12 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
                                                     <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-emerald-100/60 dark:bg-gray-800">
                                                         <span className="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
 
-                                                        <h2 className="text-sm font-normal text-emerald-500">{allArticle.status}</h2>
+                                                        <h2 className="text-sm font-normal text-emerald-500">{article.status}</h2>
                                                     </div>
                                                 </td>
 
 
                                                 <td className="px-4 py-4 text-sm whitespace-nowrap">
 
-                                                    <button className="text-2xl">
-                                                        <LuView />
-                                                    </button>
+                                                    <Link to={`/myArticles/${article._id}`} ><LuView className="text-2xl" /></Link>
+
                                                 </td>
                                                 <td className="px-4 py-4 text-sm whitespace-nowrap">
 
-                                                    <button className="text-2xl">
+                                                    <Link to= {`/myArticledUpdate/${article._id}`}><button className="text-2xl">
                                                         <FaEdit />
-                                                    </button>
+                                                    </button></Link>
+
+                                                    
                                                 </td>
                                                 <td className="px-4 py-4 text-sm whitespace-nowrap">
 
-                                                    <button className="text-2xl">
-                                                        <FaTrash />
+                                                    <button
+                                                        onClick={() => handleDeleteArticle(article)}
+                                                        className=" btn-lg">
+                                                        <FaTrashAlt></FaTrashAlt>
                                                     </button>
                                                 </td>
                                                 <td className="px-4 py-4 text-sm whitespace-nowrap">
@@ -128,38 +159,6 @@ const MyArticlesPage = () => {
                         </div>
                     </div>
                 </div>
-
-                {/* <div className="flex items-center justify-between mt-6">
-                    <a href="#" className="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5 rtl:-scale-x-100">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
-                        </svg>
-
-                        <span>
-                            previous
-                        </span>
-                    </a>
-
-                    <div className="items-center hidden lg:flex gap-x-3">
-                        <a href="#" className="px-2 py-1 text-sm text-blue-500 rounded-md dark:bg-gray-800 bg-blue-100/60">1</a>
-                        <a href="#" className="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">2</a>
-                        <a href="#" className="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">3</a>
-                        <a href="#" className="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">...</a>
-                        <a href="#" className="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">12</a>
-                        <a href="#" className="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">13</a>
-                        <a href="#" className="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">14</a>
-                    </div>
-
-                    <a href="#" className="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800">
-                        <span>
-                            Next
-                        </span>
-
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5 rtl:-scale-x-100">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-                        </svg>
-                    </a>
-                </div> */}
             </section>
         </div>
     );
