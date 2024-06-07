@@ -55,6 +55,8 @@ const router = createBrowserRouter([
       {
         path: "/myArticledUpdate/:id",
         element: <PrivateRoute><MyPageUpdate/></PrivateRoute>,
+        loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/userPublisher/${params.id}`)
+
       },
       {
         path: "/subscription",
