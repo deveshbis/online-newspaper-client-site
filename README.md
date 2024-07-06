@@ -5,7 +5,7 @@
 - **Problem it Solves:** Addresses scattered news consumption by offering a centralized, feature-rich platform with seamless user experience.
 ---
 ### Features:
-- **Dynamic News Aggregation:**  Uses React, Firebase, and Node to aggregate and present news dynamically, enhancing user engagement.
+- **Payment Method integration:**  User premium content subscription enables access to exclusive content or features, enhancing the user experience through subscribed membership.
 - **Comprehensive User Management:** Implements JWT authentication, private routes, and user roles (admin vs. normal) for secure access control.
 - **Enhanced Content Interaction:**  Includes CRUD operations, search/filter functions, and premium article subscriptions for optimized content interaction.
 ---
