@@ -11,8 +11,6 @@ const Dashboard = () => {
 
     const [isAdmin] = useAdmin()
 
-    // const isAdmin = true;
-
     return (
         <div className="flex">
             <div className="w-64 bg-yellow-600 min-h-screen text-white">
