@@ -20,18 +20,15 @@ const AllPublisher = () => {
 
     return (
         <div className="mt-5">
-            <h1 className="text-4xl border-l-8 border-indigo-500">All Publisher</h1>
-            <div className="grid grid-cols-3 gap-6">
+            {/* <h1 className="text-4xl border-l-8 border-indigo-500">All Publisher</h1> */}
+            <div>
+                {/* <div className="grid grid-cols-3 gap-6"> */}
                 {allPublisher.map((publisher, index) => (
-                    <div key={index} className="w-full max-w-xs overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 mt-4">
-                        <img className="object-cover w-full h-56" src={publisher.image} alt="avatar" />
-
-                        <div className="py-5 flex justify-between items-center p-5">
-                            <a href="#" className="block text-xl font-bold text-gray-800 dark:text-white" tabIndex="0" role="link">Branding Name</a>
-                            <span className="text-sm text-gray-700 dark:text-gray-200">{publisher.publisher}</span>
-                        </div>
-                        <div className="mt-4 sm:flex sm:items-center sm:justify-center sm:gap-4">
-
+                    <div key={index} className="mt-3 bg-white cursor-pointer rounded overflow-hidden shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] relative top-0 hover:-top-2 transition-all duration-300">
+                        <img src={publisher.image} alt="Blog Post 1" className="w-full h-60 object-cover" />
+                        <div className="p-6">
+                            <span className="text-sm block text-red-700 mb-2">Branding Name</span>
+                            <h3 className="text-xl font-bold text-[#333]">{publisher.publisher}</h3>
                         </div>
                     </div>
                 ))}

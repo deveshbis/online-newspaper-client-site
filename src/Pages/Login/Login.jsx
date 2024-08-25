@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import useAuth from "../../Hooks/useAuth";
 // import SocialLogin from "./SocialLogin";
 import loginBanner from "../../assets/loginBaner.webp"
-import SocialLogin from "./SocialLogin";
+// import SocialLogin from "./SocialLogin";
 
 
 
@@ -90,8 +90,8 @@ const Login = () => {
                     </div>
                 </form>
 
-                <div className="divider divider-neutral">Login With</div>
-                <SocialLogin></SocialLogin>
+                {/* <div className="divider divider-neutral">Login With</div>
+                <SocialLogin></SocialLogin> */}
             </div>
 
             <div className="relative h-64 w-full sm:h-96 lg:h-full lg:w-1/2">

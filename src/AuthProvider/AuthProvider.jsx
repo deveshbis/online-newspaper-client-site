@@ -53,17 +53,25 @@ const AuthProvider = ({ children }) => {
     }
 
     //logout
-    const logoutUser = async () => {
-        setLoading(true);
-        const { data } = await axiosPublic(`/logout`, {
-          withCredentials: true,
-        })
-        console.log(data)
+    // const logoutUser = async () => {
+    //     // setLoading(true);
+    //     const { data } = await axiosPublic(`/logout`, {
+    //         withCredentials: true,
+    //     })
+    //     console.log(data)
+    //     setUser(null);
+    //     signOut(auth);
+    // }
+
+
+    // //logout
+    const logoutUser = () => {
         setUser(null);
         signOut(auth);
+    };
 
 
-    }
+
 
     //current user
     // useEffect(() => {
@@ -98,7 +106,7 @@ const AuthProvider = ({ children }) => {
                 localStorage.removeItem('access-token');
                 setLoading(false);
             }
-            
+
         });
         return () => {
             return unsubscribe();

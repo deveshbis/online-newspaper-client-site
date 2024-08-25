@@ -1,56 +1,84 @@
+/* eslint-disable react/no-unknown-property */
 import { BiUser } from "react-icons/bi";
 import { MdPublishedWithChanges } from "react-icons/md";
 import { RiArticleLine } from "react-icons/ri";
 import { NavLink, Outlet } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
 import useAdmin from "../Hooks/useAdmin";
+import useAuth from "../Hooks/useAuth";
+import logoDash from '/newspaper.png';
 
 
 
 const Dashboard = () => {
 
     const [isAdmin] = useAdmin()
+    const {user} = useAuth()
 
     return (
         <div className="flex">
-            <div className="w-64 bg-yellow-600 min-h-screen text-white">
-                <h2 className="text-2xl text-center mt-3">Dashboard</h2>
-                <div className="divider"></div>
+            <nav className="bg-white shadow-xl h-screen top-0 left-0 min-w-[250px] py-6 px-4 font-[sans-serif] overflow-auto">
+                <div className="relative flex flex-col h-full">
 
-                {
-                    isAdmin ? <>
-                        <ul className="menu">
-                            <li><NavLink to="/dashboard/users"><BiUser /> All User </NavLink></li>
-                        </ul>
-                        <ul className="menu">
-                            <li><NavLink to="/dashboard/allArticlesPage"><RiArticleLine /> All Articles</NavLink></li>
-                        </ul>
-                        <ul className="menu">
-                            <li><NavLink to="/dashboard/addPublisher"><MdPublishedWithChanges /> Add Publisher</NavLink></li>
-                        </ul>
-                    </> :
-                        <>
+                    <div className="flex flex-wrap items-center cursor-pointer relative">
+                        <img src={logoDash} className="w-10 h-10" />
+
+                        <div className="ml-4">
+                            <p className="text-sm text-[#333] font-semibold">The News</p>
+                            <p className="text-xs text-gray-400 mt-0.5">Dashboard</p>
+                        </div>
                         
-                        </>
-                }
+                    </div>
 
-                <div className="divider"></div>
-                <ul className="menu">
-                    <li><NavLink to="/"><FaHome /> Home</NavLink></li>
-                </ul>
-                <ul className="menu">
-                    <li><NavLink to="/AllArticles"><FaHome /> All Articles</NavLink></li>
-                </ul>
-                <ul className="menu">
-                    <li><NavLink to="/subscription"><FaHome /> Subscription</NavLink></li>
-                </ul>
-                <ul className="menu">
-                    <li><NavLink to="/dashboard"><FaHome /> Dashboard</NavLink></li>
-                </ul>
-                <ul className="menu">
-                    <li><NavLink to="/premiumArticles"><FaHome /> Premium Articles</NavLink></li>
-                </ul>
-            </div>
+                    <hr className="my-6" />
+
+                    <div>
+                        <h4 className="text-sm text-gray-400 mb-4">Admin</h4>
+                        {
+                            isAdmin ? <>
+                                <ul className="space-y-4 px-2 flex-1 menu">
+                                    <li>
+                                        <NavLink to="/dashboard/users"><BiUser /> All User </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="/dashboard/allArticlesPage"><RiArticleLine /> All Articles</NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="/dashboard/addPublisher"><MdPublishedWithChanges /> Add Publisher</NavLink>
+                                    </li>
+                                </ul>
+                            </> :
+                                <>
+                                </>
+                        }
+                    </div>
+
+                    <hr className="my-6" />
+
+                    <div className="flex-1">
+                        <h4 className="text-sm text-gray-400 mb-4">User</h4>
+                        <ul className="space-y-4 px-2 flex-1 menu">
+                            <li><NavLink to="/"><FaHome /> Home</NavLink></li>
+                            <li><NavLink to="/AllArticles"><FaHome /> All Articles</NavLink></li>
+                            <li><NavLink to="/subscription"><FaHome /> Subscription</NavLink></li>
+                            <li><NavLink to="/dashboard"><FaHome /> Dashboard</NavLink></li>
+                            <li><NavLink to="/premiumArticles"><FaHome /> Premium Articles</NavLink></li>
+                        </ul>
+                    </div>
+
+                    <div className="mt-4">
+
+                        <div className="flex flex-wrap items-center cursor-pointer border-t py-2 mt-6">
+                            <img src={user.photoURL} className="w-10 h-10 rounded-md border-2 border-white" />
+                            <div className="ml-4">
+                                <p className="text-sm text-[#333] font-semibold">{user.displayName} </p>
+                                <p className="text-xs text-gray-400 mt-0.5">Admin</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </nav>
             <div className="flex-1 p-10">
                 <Outlet></Outlet>
             </div>
