@@ -21,9 +21,6 @@ const Home = () => {
                     <LeftSide></LeftSide>
                 </div>
                 <div className="col-span-2 border">
-                    {/* {
-                        news.map(aNews => <NewsCard key={aNews._id} news={aNews}></NewsCard>)
-                    } */}
                     <TrendingArticles/>
                 </div>
                 <div className="border">

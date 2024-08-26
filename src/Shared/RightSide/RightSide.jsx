@@ -8,14 +8,6 @@ const RightSide = () => {
         <div>
             <div className='p-5 space-y-3 mb-5'>
                 <h2 className="text-3xl">Login Us</h2>
-                {/* <button className="btn btn-outline w-full">
-                    <FaGoogle></FaGoogle>
-                    Google
-                </button>
-                <button className="btn btn-outline w-full">
-                    <FaGithub></FaGithub>
-                    Github
-                </button> */}
                 <SocialLogin></SocialLogin>
             </div>
             <div className='p-5  mb-5'>
@@ -37,7 +29,7 @@ const RightSide = () => {
                 <h2 className="text-3xl">Publisher-Zone</h2>
                 {/* <AllPublisher/> */}
                 <AllPublisher></AllPublisher>
-                
+
             </div>
         </div>
     );

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import Tranding from "../../component/Tranding";
 
 
 const LeftSide = () => {
@@ -11,30 +12,26 @@ const LeftSide = () => {
             .then(res => res.json())
             .then(data => setCategories(data));
     }, [])
-    console.log(categories);
 
     return (
         <div>
             <div className="space-y-6">
-                <h1 className="text-3xl">All Category</h1>
+                <h1 className="text-3xl text-center bg-black text-white px-5 py-3">All Category</h1>
+                {/* <h1
+                    className="px-5 py-3 inline-flex items-center w-full rounded-lg text-white text-base tracking-wider font-semibold border-none outline-none bg-black hover:bg-[#333] active:bg-black">
+                    Category
+                </h1> */}
                 {
 
                     categories.map(category =>
-                        <Link className="block ml-4 text-xl font-semibold text-center"
+                        <h3 className="block ml-4 text-xl font-semibold text-center cursor-pointer"
                             to={`/category/${category.id}`}
-                            key={category.id}>{category.name}</Link>)
+                            key={category.id}>{category.name}</h3>)
                 }
             </div>
-            <div>
-                <div className="bg-white cursor-pointer rounded overflow-hidden group">
-                    <div className="relative overflow-hidden">
-                        <img src="https://readymadeui.com/Imagination.webp" alt="Blog Post 1" className="w-full h-60 object-cover group-hover:scale-125 transition-all duration-300" />
-                        <div className="px-4 py-2.5 text-white text-sm tracking-wider bg-orange-500 absolute bottom-0 right-0">June 10, 2023</div>
-                    </div>
-                    <div className="p-6">
-                        <h3 className="text-xl font-bold text-[#333]">A Guide to Igniting Your Imagination</h3>
-                    </div>
-                </div>
+            <div className="space-y-3">
+                <h1 className="text-3xl text-center bg-black text-white px-5 py-3 mt-5">Tranding News</h1>
+                <Tranding></Tranding>
             </div>
         </div>
     );

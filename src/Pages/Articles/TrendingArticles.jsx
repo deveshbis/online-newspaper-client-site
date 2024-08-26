@@ -33,7 +33,7 @@ const TrendingArticles = () => {
         <div>
             {
                 news.map(aNews => <div key={aNews._id} className="bg-white rounded overflow-hidden">
-                    <img src={aNews.image} alt="Blog Post 1" className="w-full h-full object-cover" />
+                    <img src={aNews.image} alt="" className="w-full h-full object-cover" />
                     <div className="p-6">
                         <h3 className="text-lg font-bold text-gray-800 mb-3">{aNews.headline}</h3>
                         <p className="text-gray-500 text-sm">{truncateContent(aNews.content, 50)}</p>
