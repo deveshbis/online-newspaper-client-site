@@ -7,13 +7,14 @@ import { FaHome } from "react-icons/fa";
 import useAdmin from "../Hooks/useAdmin";
 import useAuth from "../Hooks/useAuth";
 import logoDash from '/newspaper.png';
+import AdminHome from "./AminHome/AdminHome";
 
 
 
 const Dashboard = () => {
 
     const [isAdmin] = useAdmin()
-    const {user} = useAuth()
+    const { user } = useAuth()
 
     return (
         <div className="flex">
@@ -27,7 +28,7 @@ const Dashboard = () => {
                             <p className="text-sm text-[#333] font-semibold">The News</p>
                             <p className="text-xs text-gray-400 mt-0.5">Dashboard</p>
                         </div>
-                        
+
                     </div>
 
                     <hr className="my-6" />
@@ -45,6 +46,10 @@ const Dashboard = () => {
                                     </li>
                                     <li>
                                         <NavLink to="/dashboard/addPublisher"><MdPublishedWithChanges /> Add Publisher</NavLink>
+                                    </li>
+
+                                    <li>
+                                        <NavLink to="/dashboard/premiumUser" r><BiUser /> Premium User</NavLink>
                                     </li>
                                 </ul>
                             </> :
@@ -80,6 +85,7 @@ const Dashboard = () => {
 
             </nav>
             <div className="flex-1 p-10">
+                <AdminHome></AdminHome>
                 <Outlet></Outlet>
             </div>
         </div>

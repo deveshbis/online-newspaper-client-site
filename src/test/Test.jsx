@@ -1,6 +1,5 @@
 
-
-const Payment = () => {
+const Test = () => {
     return (
         <div>
             
@@ -8,4 +7,4 @@ const Payment = () => {
     );
 };
 
-export default Payment;
+export default Test;
