@@ -20,8 +20,8 @@ const ArticlesViewDetails = () => {
     }, [id]);
     console.log(details);
     return (
-        <div className="grid grid-cols-4 gap-6">
-            <div className="col-span-3 border">
+        <div className="grid lg:grid-cols-4 gap-6">
+            <div className="lg:col-span-3 border">
                 <div className="flex flex-col  p-6 space-y-6 overflow-hidden rounded-lg shadow-md">
                     <div className="flex space-x-4">
                         <img alt="" src={details.image} className="object-cover w-12 h-12 rounded-full shadow dark:bg-gray-500" />
@@ -37,7 +37,7 @@ const ArticlesViewDetails = () => {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-3">
+                <div className="grid lg:grid-cols-3">
                    <Tranding></Tranding>
                 </div>
             </div>

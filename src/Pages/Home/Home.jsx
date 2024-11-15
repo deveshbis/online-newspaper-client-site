@@ -16,11 +16,11 @@ const Home = () => {
             <AllPublisher/>
             <Featuresplan></Featuresplan> */}
 
-            <div className="grid grid-cols-4 gap-6">
+            <div className="grid lg:grid-cols-4 gap-6">
                 <div className="border">
                     <LeftSide></LeftSide>
                 </div>
-                <div className="col-span-2 border">
+                <div className="lg:col-span-2 border">
                     <TrendingArticles/>
                 </div>
                 <div className="border">

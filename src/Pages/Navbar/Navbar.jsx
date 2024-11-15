@@ -27,7 +27,7 @@ const Navbar = () => {
     const navLinks = (
         <>
             <li><NavLink to='/'>Home</NavLink></li>
-            {user &&<li><NavLink to='/allArticles'>All Articles</NavLink></li>}
+            {/* {user &&<li><NavLink to='/allArticles'>All Articles</NavLink></li>} */}
             {user &&<li><NavLink to='/AddArticle'>Add Articles</NavLink></li>}
             {user && <li><NavLink to='/subscription'>Subscription</NavLink></li>}
             {isAdmin && <li><NavLink to='/dashboard'>Dashboard</NavLink></li>}
@@ -45,7 +45,7 @@ const Navbar = () => {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h8m-8 6h16" />
                         </svg>
                     </div>
-                    <ul tabIndex={0} className={`menu menu-sm dropdown-content mt-3 z-[1060] p-2  text-black rounded-box w-52 ${dropdownOpen ? 'block' : 'hidden'}`}>
+                    <ul tabIndex={0} className={`menu menu-sm dropdown-content mt-3 z-[1060] p-2 bg-white text-black rounded-box w-52 ${dropdownOpen ? 'block' : 'hidden'}`}>
                         {navLinks}
                     </ul>
                 </div>

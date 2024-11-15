@@ -2,7 +2,7 @@
 import { BiUser } from "react-icons/bi";
 import { MdPublishedWithChanges } from "react-icons/md";
 import { RiArticleLine } from "react-icons/ri";
-import { NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
 import useAdmin from "../Hooks/useAdmin";
 import useAuth from "../Hooks/useAuth";
@@ -22,12 +22,13 @@ const Dashboard = () => {
                 <div className="relative flex flex-col h-full">
 
                     <div className="flex flex-wrap items-center cursor-pointer relative">
-                        <img src={logoDash} className="w-10 h-10" />
+                        <Link to='/'><img src={logoDash} className="w-10 h-10" /></Link>
 
-                        <div className="ml-4">
-                            <p className="text-sm text-[#333] font-semibold">The News</p>
-                            <p className="text-xs text-gray-400 mt-0.5">Dashboard</p>
-                        </div>
+                        <Link to='/'>
+                            <div className="ml-4">
+                                <p className="text-sm text-[#333] font-semibold">The News</p>
+                                <p className="text-xs text-gray-400 mt-0.5">Dashboard</p>
+                            </div></Link>
 
                     </div>
 
@@ -54,23 +55,19 @@ const Dashboard = () => {
                                 </ul>
                             </> :
                                 <>
+                                    <div className="flex-1">
+                                        <h4 className="text-sm text-gray-400 mb-4">User</h4>
+                                        <ul className="space-y-4 px-2 flex-1 menu">
+                                            <li><NavLink to="/"><FaHome /> Home</NavLink></li>
+                                            <li><NavLink to="/AllArticles"><FaHome /> All Articles</NavLink></li>
+                                            <li><NavLink to="/subscription"><FaHome /> Subscription</NavLink></li>
+                                            <li><NavLink to="/dashboard"><FaHome /> Dashboard</NavLink></li>
+                                            <li><NavLink to="/premiumArticles"><FaHome /> Premium Articles</NavLink></li>
+                                        </ul>
+                                    </div>
                                 </>
                         }
                     </div>
-
-                    <hr className="my-6" />
-
-                    <div className="flex-1">
-                        <h4 className="text-sm text-gray-400 mb-4">User</h4>
-                        <ul className="space-y-4 px-2 flex-1 menu">
-                            <li><NavLink to="/"><FaHome /> Home</NavLink></li>
-                            <li><NavLink to="/AllArticles"><FaHome /> All Articles</NavLink></li>
-                            <li><NavLink to="/subscription"><FaHome /> Subscription</NavLink></li>
-                            <li><NavLink to="/dashboard"><FaHome /> Dashboard</NavLink></li>
-                            <li><NavLink to="/premiumArticles"><FaHome /> Premium Articles</NavLink></li>
-                        </ul>
-                    </div>
-
                     <div className="mt-4">
 
                         <div className="flex flex-wrap items-center cursor-pointer border-t py-2 mt-6">
